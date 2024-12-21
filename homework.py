@@ -38,7 +38,7 @@ def check_tokens():
                              f'Бот не может быть запущен.')
             raise ValueError(
                 'Нет необходимых переменных окружения'
-                )
+            )
 
 
 def send_message(bot, message):
@@ -46,7 +46,7 @@ def send_message(bot, message):
     try:
         bot.send_message(
             chat_id=TELEGRAM_CHAT_ID, text=message
-                         )
+        )
         logging.debug(f"Сообщение отправлено: '{message}'")
     except Exception as error:
         logging.error(f"Ошибка при отправке сообщения: {error}")
@@ -58,14 +58,14 @@ def get_api_answer(timestamp):
     try:
         homework_statuses = requests.get(
             ENDPOINT, headers=HEADERS, params=payload
-            )
+        )
         if homework_statuses.status_code != 200:
             logging.error(
                 f'Неожиданный статус работы: {homework_statuses.status_code}.'
-                 )
+            )
             raise ConnectionError(
                 f'Неожиданный статус работы: {homework_statuses.status_code}'
-                )
+            )
     except requests.RequestException as error:
         logging.error(f'Ошибка при запросе к API: {error}')
     return homework_statuses.json()
@@ -113,8 +113,10 @@ def main():
                     new_homework = homeworks[0]
                     new_homework_name = new_homework['homework_name']
                     new_status = new_homework['status']
-                    if (new_homework_name not in prev_homeworks or
-                       prev_homeworks[new_homework_name] != new_status):
+                    if (
+                        new_homework_name not in prev_homeworks
+                        or prev_homeworks[new_homework_name] != new_status
+                    ):
                         message = parse_status(new_homework)
                         send_message(bot, message)
                         prev_homeworks[new_homework_name] = new_status

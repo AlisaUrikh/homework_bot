@@ -32,7 +32,7 @@ HOMEWORK_VERDICTS = {
 
 def check_tokens():
     """Проверка наличия переменных окружения."""
-    required_tokens = [PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID] 
+    required_tokens = [PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID]
     unavailable_tokens = []
     for token in required_tokens:
         if token is None:
@@ -68,7 +68,7 @@ def get_api_answer(timestamp):
     except requests.RequestException as error:
         raise APIResponseError(
             f'Не удалось получить ответ от API: {error}'
-            )
+        )
     return homework_statuses.json()
 
 
@@ -105,9 +105,7 @@ def main():
     if len(missing_tokens) > 0:
         logging.critical('Нет необходимых переменных окружения.'
                          'Бот не может быть запущен.')
-        raise ValueError(
-           'Нет необходимых переменных окружения'
-        )
+        raise ValueError('Нет необходимых переменных окружения')
     bot = TeleBot(token=TELEGRAM_TOKEN)
     timestamp = int(time.time())
     previous_message = ''

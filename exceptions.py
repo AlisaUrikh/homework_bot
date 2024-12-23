@@ -4,10 +4,6 @@
 class APIResponseError(Exception):
     """Исключение для неожиданного статуса ответа."""
 
-    pass
 
-
-class ConnectionError(Exception):
+class UnavailablePageError(Exception):
     """Исключение для неожиданного статуса ответа."""
-
-    pass
